@@ -1,0 +1,42 @@
+{
+	"name": "my-workflow",
+	"version": "1.0.0",
+	"description": "Cloudflare Workflow generated from workflow editor",
+	"private": true,
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy:dev": "wrangler deploy",
+		"deploy:prod": "wrangler deploy --env production",
+		"format": "prettier . --write",
+		"format:check": "prettier . --check",
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run --config vitest.config.mts",
+		"test:coverage": "vitest run --coverage --config vitest.config.mts",
+		"release": "semantic-release",
+		"cf-typegen": "wrangler types"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "0.12.10",
+		"@eslint/js": "9.17.0",
+		"@semantic-release/changelog": "6.0.3",
+		"@semantic-release/commit-analyzer": "13.0.1",
+		"@semantic-release/exec": "6.0.3",
+		"@semantic-release/git": "10.0.1",
+		"@semantic-release/github": "11.0.6",
+		"@semantic-release/npm": "12.0.2",
+		"@semantic-release/release-notes-generator": "14.1.0",
+		"@types/node": "24.10.1",
+		"@vitest/coverage-istanbul": "3.2.4",
+		"eslint": "9.17.0",
+		"eslint-config-prettier": "10.1.8",
+		"globals": "15.14.0",
+		"prettier": "3.4.2",
+		"semantic-release": "24.2.1",
+		"typescript": "5.9.3",
+		"typescript-eslint": "8.49.0",
+		"vitest": "3.2.4",
+		"wrangler": "4.51.0"
+	},
+	"packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b"
+}

@@ -1,0 +1,36 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "my-workflow-dev-v1",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-02-23",
+	"observability": {
+		"enabled": true,
+	},
+	"vars": {
+		"ENVIRONMENT": "development",
+		"WORKFLOW_VERSION": "1",
+	},
+	"workflows": [
+		{
+			"name": "my-workflow-dev-v1",
+			"binding": "WORKFLOW",
+			"class_name": "MyWorkflow",
+		},
+	],
+	"env": {
+		"production": {
+			"name": "my-workflow-v1",
+			"vars": {
+				"ENVIRONMENT": "production",
+				"WORKFLOW_VERSION": "1",
+			},
+			"workflows": [
+				{
+					"name": "my-workflow-v1",
+					"binding": "WORKFLOW",
+					"class_name": "MyWorkflow",
+				},
+			],
+		},
+	},
+}
