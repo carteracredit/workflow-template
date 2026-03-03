@@ -14,10 +14,8 @@ import {
  */
 
 interface WorkflowEnv {
-	FORMS?: unknown;
-	NOTIFICATIONS?: unknown;
-	FLAGS?: unknown;
-	AI?: unknown;
+	WORKFLOW_SVC: Fetcher;
+	WORKFLOW_ID: string;
 }
 
 interface WorkflowParams {
