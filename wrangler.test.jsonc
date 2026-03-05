@@ -1,0 +1,18 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "my-workflow-dev-v1",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-02-23",
+	"vars": {
+		"ENVIRONMENT": "development",
+		"WORKFLOW_VERSION": "1",
+		"WORKFLOW_ID": "__WORKFLOW_ID__",
+	},
+	"workflows": [
+		{
+			"name": "my-workflow-dev-v1",
+			"binding": "WORKFLOW",
+			"class_name": "MyWorkflow",
+		},
+	],
+}

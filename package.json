@@ -5,9 +5,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "wrangler dev",
-		"deploy": "wrangler deploy",
 		"deploy:dev": "wrangler deploy",
-		"deploy:prod": "wrangler deploy",
+		"deploy:prod": "wrangler deploy --env production",
 		"format": "prettier . --write",
 		"format:check": "prettier . --check",
 		"lint": "eslint .",

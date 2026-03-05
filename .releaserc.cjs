@@ -1,8 +1,8 @@
 /**
  * semantic-release configuration
  *
- * Each workflow repo is dedicated to a single environment (dev or production).
- * All deployments happen from the "main" branch only.
+ * - main: stable releases (e.g. 1.0.0, 2.0.0)
+ * - dev: prerelease channel "rc" (e.g. 1.0.0-rc.1, 2.0.0-rc.1)
  *
  * On major version bumps (feat!: commits), the prepareCmd updates
  * wrangler.jsonc so the Worker is deployed under a new versioned name
@@ -10,7 +10,14 @@
  * for in-flight workflow instances.
  */
 module.exports = {
-	branches: ["main"],
+	branches: [
+		"main",
+		{
+			name: "dev",
+			channel: "rc",
+			prerelease: "rc",
+		},
+	],
 	tagFormat: "v${version}",
 	plugins: [
 		"@semantic-release/commit-analyzer",
