@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - dev
   workflow_dispatch:
 
 permissions:
@@ -58,10 +57,5 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          if [ "${{ github.ref_name }}" = "main" ]; then
-            echo "Deploying to production (version ${{ steps.check_release.outputs.version }})..."
-            pnpm run deploy:prod
-          else
-            echo "Deploying to development (version ${{ steps.check_release.outputs.version }})..."
-            pnpm run deploy:dev
-          fi
+          echo "Deploying version ${{ steps.check_release.outputs.version }}..."
+          pnpm run deploy
