@@ -11,6 +11,11 @@
 			"binding": "WORKFLOW_SVC",
 			"service": "workflow-svc",
 		},
+		{
+			"binding": "NOTIFICATIONS_SERVICE",
+			"service": "notifications-svc",
+			"entrypoint": "NotificationsEntrypoint",
+		},
 	],
 	"vars": {
 		"ENVIRONMENT": "development",
@@ -31,6 +36,11 @@
 				{
 					"binding": "WORKFLOW_SVC",
 					"service": "workflow-svc",
+				},
+				{
+					"binding": "NOTIFICATIONS_SERVICE",
+					"service": "notifications-svc-prod",
+					"entrypoint": "NotificationsEntrypoint",
 				},
 			],
 			"vars": {
