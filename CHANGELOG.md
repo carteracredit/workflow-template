@@ -1,3 +1,10 @@
+# [1.1.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.0.0...v1.1.0-rc.1) (2026-03-19)
+
+
+### Features
+
+* add workflow service configuration and update environment variables ([3c5dba1](https://github.com/carteracredit/workflow-template/commit/3c5dba132873db7a149e5eb1efca780d5b560a17))
+
 # [1.0.0-rc.3](https://github.com/carteracredit/workflow-template/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2026-03-05)
 
 ### Features
