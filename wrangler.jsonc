@@ -6,9 +6,25 @@
 	"observability": {
 		"enabled": true,
 	},
+	"services": [
+		{
+			"binding": "WORKFLOW_SVC",
+			"service": "workflow-svc",
+		},
+		{
+			"binding": "NOTIFICATIONS_SERVICE",
+			"service": "notifications-svc",
+			"entrypoint": "NotificationsEntrypoint",
+		},
+		{
+			"binding": "AUTH_SERVICE",
+			"service": "auth-svc",
+		},
+	],
 	"vars": {
 		"ENVIRONMENT": "development",
 		"WORKFLOW_VERSION": "1",
+		"WORKFLOW_ID": "__WORKFLOW_ID__",
 	},
 	"workflows": [
 		{
@@ -20,9 +36,25 @@
 	"env": {
 		"production": {
 			"name": "my-workflow-v1",
+			"services": [
+				{
+					"binding": "WORKFLOW_SVC",
+					"service": "workflow-svc",
+				},
+				{
+					"binding": "NOTIFICATIONS_SERVICE",
+					"service": "notifications-svc-prod",
+					"entrypoint": "NotificationsEntrypoint",
+				},
+				{
+					"binding": "AUTH_SERVICE",
+					"service": "auth-svc",
+				},
+			],
 			"vars": {
 				"ENVIRONMENT": "production",
 				"WORKFLOW_VERSION": "1",
+				"WORKFLOW_ID": "__WORKFLOW_ID__",
 			},
 			"workflows": [
 				{
