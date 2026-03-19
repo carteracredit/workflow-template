@@ -35,14 +35,16 @@ function extractBearer(request: Request): string | null {
 
 async function verifyJwt(request: Request, env: Env): Promise<Response | null> {
 	const authService = (env as { AUTH_SERVICE?: Fetcher }).AUTH_SERVICE;
-	if (!authService) return Response.json({ error: "Unauthorized" }, { status: 401 });
+	if (!authService)
+		return Response.json({ error: "Unauthorized" }, { status: 401 });
 	const token = extractBearer(request);
 	if (!token) return Response.json({ error: "Unauthorized" }, { status: 401 });
 	try {
 		const jwks = await getJWKS(authService);
 		const jwksInstance = jose.createLocalJWKSet(jwks);
 		const { payload } = await jose.jwtVerify(token, jwksInstance);
-		if (!payload.sub) return Response.json({ error: "Unauthorized" }, { status: 401 });
+		if (!payload.sub)
+			return Response.json({ error: "Unauthorized" }, { status: 401 });
 		return null;
 	} catch {
 		return Response.json({ error: "Unauthorized" }, { status: 401 });
@@ -101,10 +103,8 @@ export default {
 							);
 						}
 						const payload =
-							rawBody &&
-							typeof rawBody === "object" &&
-							"payload" in rawBody
-								? (rawBody as { payload?: unknown }).payload ?? {}
+							rawBody && typeof rawBody === "object" && "payload" in rawBody
+								? ((rawBody as { payload?: unknown }).payload ?? {})
 								: {};
 						await instance.sendEvent({
 							type,
