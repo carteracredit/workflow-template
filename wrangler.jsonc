@@ -16,6 +16,10 @@
 			"service": "notifications-svc",
 			"entrypoint": "NotificationsEntrypoint",
 		},
+		{
+			"binding": "AUTH_SERVICE",
+			"service": "auth-svc",
+		},
 	],
 	"vars": {
 		"ENVIRONMENT": "development",
@@ -41,6 +45,10 @@
 					"binding": "NOTIFICATIONS_SERVICE",
 					"service": "notifications-svc-prod",
 					"entrypoint": "NotificationsEntrypoint",
+				},
+				{
+					"binding": "AUTH_SERVICE",
+					"service": "auth-svc",
 				},
 			],
 			"vars": {
