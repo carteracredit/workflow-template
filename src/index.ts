@@ -3,22 +3,20 @@ import { MyWorkflow } from "./workflow";
 
 export { MyWorkflow };
 
+interface AuthSvcRpc {
+	getJwks(): Promise<{ keys: Record<string, unknown>[] }>;
+	fetch(request: Request): Promise<Response>;
+}
+
 const JWKS_CACHE_TTL_MS = 3600 * 1000;
 let cachedJWKS: jose.JSONWebKeySet | null = null;
 let cachedJWKSExpiry = 0;
 
-async function getJWKS(authService: Fetcher): Promise<jose.JSONWebKeySet> {
+async function getJWKS(authService: AuthSvcRpc): Promise<jose.JSONWebKeySet> {
 	const now = Date.now();
 	if (cachedJWKS && cachedJWKSExpiry > now) return cachedJWKS;
-	const res = await authService.fetch(
-		new Request("http://internal/api/auth/jwks", {
-			headers: { Accept: "application/json" },
-		}),
-	);
-	if (!res.ok) {
-		throw new Error(`JWKS fetch failed: ${res.status}`);
-	}
-	const jwks = (await res.json()) as jose.JSONWebKeySet;
+	const result = await authService.getJwks();
+	const jwks = result as jose.JSONWebKeySet;
 	if (!jwks.keys?.length) throw new Error("Invalid JWKS");
 	cachedJWKS = jwks;
 	cachedJWKSExpiry = now + JWKS_CACHE_TTL_MS;
@@ -34,7 +32,7 @@ function extractBearer(request: Request): string | null {
 }
 
 async function verifyJwt(request: Request, env: Env): Promise<Response | null> {
-	const authService = (env as { AUTH_SERVICE?: Fetcher }).AUTH_SERVICE;
+	const authService = (env as { AUTH_SERVICE?: AuthSvcRpc }).AUTH_SERVICE;
 	if (!authService)
 		return Response.json({ error: "Unauthorized" }, { status: 401 });
 	const token = extractBearer(request);
