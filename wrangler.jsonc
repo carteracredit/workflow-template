@@ -10,6 +10,7 @@
 		{
 			"binding": "WORKFLOW_SVC",
 			"service": "workflow-svc",
+			"entrypoint": "WorkflowSvcEntrypoint",
 		},
 		{
 			"binding": "NOTIFICATIONS_SERVICE",
@@ -19,6 +20,7 @@
 		{
 			"binding": "AUTH_SERVICE",
 			"service": "auth-svc",
+			"entrypoint": "AuthSvcEntrypoint",
 		},
 	],
 	"vars": {
@@ -40,6 +42,7 @@
 				{
 					"binding": "WORKFLOW_SVC",
 					"service": "workflow-svc",
+					"entrypoint": "WorkflowSvcEntrypoint",
 				},
 				{
 					"binding": "NOTIFICATIONS_SERVICE",
@@ -49,6 +52,7 @@
 				{
 					"binding": "AUTH_SERVICE",
 					"service": "auth-svc",
+					"entrypoint": "AuthSvcEntrypoint",
 				},
 			],
 			"vars": {

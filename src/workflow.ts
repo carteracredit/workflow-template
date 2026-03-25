@@ -14,7 +14,15 @@ import {
  */
 
 interface WorkflowEnv {
-	WORKFLOW_SVC: Fetcher;
+	WORKFLOW_SVC: {
+		batchUpdateFlagState: (input: {
+			workflowId: string;
+			changes: Array<{ flagId: string; optionId: string }>;
+			instanceId?: string;
+		}) => Promise<{
+			changes: Array<{ flagId: string; optionId: string; updated: boolean }>;
+		}>;
+	};
 	WORKFLOW_ID: string;
 }
 
