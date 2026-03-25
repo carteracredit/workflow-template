@@ -52,7 +52,10 @@ async function verifyJwt(request: Request, env: Env): Promise<Response | null> {
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const url = new URL(request.url);
-		const pathSegments = url.pathname.replace(/^\/+|\/+$/g, "").split("/");
+		const pathSegments = url.pathname
+			.replace(/^\/+|\/+$/g, "")
+			.split("/")
+			.filter(Boolean);
 
 		// POST / — create instance
 		if (request.method === "POST" && pathSegments.length === 0) {
