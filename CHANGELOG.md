@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/carteracredit/workflow-template/compare/v1.1.0...v1.1.1) (2026-03-25)
+
+
+### Bug Fixes
+
+* filter empty path segments in URL processing for improved request handling ([4b2a883](https://github.com/carteracredit/workflow-template/commit/4b2a883b8a1a593e27c3cfe2061c8e95c1a4805b))
+
 ## [1.1.1-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.1.0...v1.1.1-rc.1) (2026-03-25)
 
 
