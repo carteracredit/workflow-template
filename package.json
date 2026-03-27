@@ -1,6 +1,6 @@
 {
 	"name": "my-workflow",
-	"version": "1.1.1-rc.1",
+	"version": "1.2.0-rc.1",
 	"description": "Cloudflare Workflow generated from workflow editor",
 	"private": true,
 	"scripts": {

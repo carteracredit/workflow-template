@@ -1,3 +1,10 @@
+# [1.2.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.1.1-rc.1...v1.2.0-rc.1) (2026-03-27)
+
+
+### Features
+
+* add CASES_SVC configuration to wrangler and update workflow interface ([4025ad0](https://github.com/carteracredit/workflow-template/commit/4025ad0e27a538903a7fb1bbc30687ea4217c248))
+
 ## [1.1.1-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.1.0...v1.1.1-rc.1) (2026-03-25)
 
 
