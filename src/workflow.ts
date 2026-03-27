@@ -26,7 +26,10 @@ interface WorkflowEnv {
 	WORKFLOW_ID: string;
 	CASES_SVC: {
 		getCaseRoleContacts: (input: { caseId: string }) => Promise<{
-			roleContacts: Record<string, { email: string; name: string | null; phone?: string | null }>;
+			roleContacts: Record<
+				string,
+				{ email: string; name: string | null; phone?: string | null }
+			>;
 		}>;
 	};
 }
