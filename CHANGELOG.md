@@ -1,3 +1,10 @@
+# [1.2.0-rc.3](https://github.com/carteracredit/workflow-template/compare/v1.2.0-rc.2...v1.2.0-rc.3) (2026-04-01)
+
+
+### Bug Fixes
+
+* add missing newline at end of package.json ([4bcf117](https://github.com/carteracredit/workflow-template/commit/4bcf11711ec6c1764f3df77bebff60163ee6c6dd))
+
 # [1.2.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.2.0-rc.1...v1.2.0-rc.2) (2026-04-01)
 
 
