@@ -22,6 +22,15 @@ interface WorkflowEnv {
 		}) => Promise<{
 			changes: Array<{ flagId: string; optionId: string; updated: boolean }>;
 		}>;
+		updateInstanceProgress: (input: {
+			workflowId: string;
+			instanceId: string;
+			nodeId: string;
+			nodeType: string;
+			stepName: string;
+			status: "in_progress" | "completed" | "waiting_event";
+			eventType?: string;
+		}) => Promise<{ ok: boolean }>;
 	};
 	WORKFLOW_ID: string;
 	CASES_SVC: {
@@ -31,6 +40,10 @@ interface WorkflowEnv {
 				{ email: string; name: string | null; phone?: string | null }
 			>;
 		}>;
+		updateCaseObject: (
+			caseId: string,
+			data: Record<string, unknown>,
+		) => Promise<void>;
 	};
 }
 
