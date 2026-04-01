@@ -1,3 +1,10 @@
+# [1.2.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.2.0-rc.1...v1.2.0-rc.2) (2026-04-01)
+
+
+### Features
+
+* add updateInstanceProgress and updateCaseObject methods to WorkflowEnv interface ([02a51d4](https://github.com/carteracredit/workflow-template/commit/02a51d45cf142321f810db5edfce275fa42d712d))
+
 # [1.2.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.1.1-rc.1...v1.2.0-rc.1) (2026-03-27)
 
 
