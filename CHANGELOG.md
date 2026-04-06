@@ -5,6 +5,19 @@
 
 * add retryCount property to WorkflowEnv interface ([65b58e7](https://github.com/carteracredit/workflow-template/commit/65b58e75012df14a4b143c0fef2a7c58df20bbd0))
 
+# [1.2.0](https://github.com/carteracredit/workflow-template/compare/v1.1.1...v1.2.0) (2026-04-01)
+
+
+### Bug Fixes
+
+* add missing newline at end of package.json ([4bcf117](https://github.com/carteracredit/workflow-template/commit/4bcf11711ec6c1764f3df77bebff60163ee6c6dd))
+
+
+### Features
+
+* add CASES_SVC configuration to wrangler and update workflow interface ([4025ad0](https://github.com/carteracredit/workflow-template/commit/4025ad0e27a538903a7fb1bbc30687ea4217c248))
+* add updateInstanceProgress and updateCaseObject methods to WorkflowEnv interface ([02a51d4](https://github.com/carteracredit/workflow-template/commit/02a51d45cf142321f810db5edfce275fa42d712d))
+
 # [1.2.0-rc.3](https://github.com/carteracredit/workflow-template/compare/v1.2.0-rc.2...v1.2.0-rc.3) (2026-04-01)
 
 
