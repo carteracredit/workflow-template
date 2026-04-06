@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/carteracredit/workflow-template/compare/v1.2.0...v1.3.0) (2026-04-06)
+
+
+### Features
+
+* add retryCount property to WorkflowEnv interface ([65b58e7](https://github.com/carteracredit/workflow-template/commit/65b58e75012df14a4b143c0fef2a7c58df20bbd0))
+
 # [1.3.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.2.0...v1.3.0-rc.1) (2026-04-06)
 
 
