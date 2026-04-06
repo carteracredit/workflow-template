@@ -30,6 +30,7 @@ interface WorkflowEnv {
 			stepName: string;
 			status: "in_progress" | "completed" | "waiting_event";
 			eventType?: string;
+			retryCount?: number;
 		}) => Promise<{ ok: boolean }>;
 	};
 	WORKFLOW_ID: string;
