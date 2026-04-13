@@ -1,3 +1,10 @@
+# [1.3.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.3.0-rc.1...v1.3.0-rc.2) (2026-04-13)
+
+
+### Features
+
+* add WorkflowPromotionSnapshot interface and update WorkflowParams to include promotion and selectedTerm ([01c3803](https://github.com/carteracredit/workflow-template/commit/01c38037b38b1d527f155667c9b0a2f60e6dc62d))
+
 # [1.3.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.2.0...v1.3.0-rc.1) (2026-04-06)
 
 
