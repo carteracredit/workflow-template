@@ -48,7 +48,23 @@ interface WorkflowEnv {
 	};
 }
 
+interface WorkflowPromotionSnapshot {
+	name: string;
+	contractorFee: number;
+	interestRate: number;
+	maxTermMonths: number;
+	maxAmount: number;
+	minDownPayment: number;
+	statutoryRate: number;
+	secondaryRate: number;
+	loanTemplateNumber: number;
+	loanPortfolioName: string;
+	template: string;
+}
+
 interface WorkflowParams {
+	promotion?: WorkflowPromotionSnapshot | null;
+	selectedTerm?: number | null;
 	[key: string]: unknown;
 }
 
