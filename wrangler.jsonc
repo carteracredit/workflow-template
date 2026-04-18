@@ -43,10 +43,17 @@
 	"env": {
 		"production": {
 			"name": "my-workflow-v1",
+			"workers_dev": false,
+			"routes": [
+				{
+					"pattern": "my-workflow-v1.cartera.credit",
+					"custom_domain": true,
+				},
+			],
 			"services": [
 				{
 					"binding": "WORKFLOW_SVC",
-					"service": "workflow-svc",
+					"service": "workflow-svc-prod",
 					"entrypoint": "WorkflowSvcEntrypoint",
 				},
 				{
@@ -56,12 +63,12 @@
 				},
 				{
 					"binding": "AUTH_SERVICE",
-					"service": "auth-svc",
+					"service": "auth-svc-prod",
 					"entrypoint": "AuthSvcEntrypoint",
 				},
 				{
 					"binding": "CASES_SVC",
-					"service": "cases-svc",
+					"service": "cases-svc-prod",
 					"entrypoint": "CasesSvcEntrypoint",
 				},
 			],
