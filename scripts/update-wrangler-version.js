@@ -40,7 +40,7 @@ const content = readFileSync(WRANGLER_PATH, "utf8");
 // Replace all versioned Worker name patterns: -v<digits> -> -v<major>
 // Covers: "name": "my-workflow-dev-v1" and "name": "my-workflow-v1"
 const updated = content
-	.replace(/-v\d+(?=")/g, `-v${major}`)
+	.replace(/-v\d+/g, `-v${major}`)
 	.replace(/"WORKFLOW_VERSION":\s*"\d+"/, `"WORKFLOW_VERSION": "${major}"`);
 
 writeFileSync(WRANGLER_PATH, updated, "utf8");
