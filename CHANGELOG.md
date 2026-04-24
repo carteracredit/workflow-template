@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/carteracredit/workflow-template/compare/v1.4.0...v1.5.0) (2026-04-24)
+
+
+### Features
+
+* add signature request handling to WorkflowEnv interface ([da36d0d](https://github.com/carteracredit/workflow-template/commit/da36d0d5b04afddbc06b3a878e1fbde3bafb6143))
+
 # [1.5.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.4.0...v1.5.0-rc.1) (2026-04-24)
 
 
