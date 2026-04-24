@@ -5,6 +5,13 @@
 
 * add signature request handling to WorkflowEnv interface ([da36d0d](https://github.com/carteracredit/workflow-template/commit/da36d0d5b04afddbc06b3a878e1fbde3bafb6143))
 
+# [1.4.0](https://github.com/carteracredit/workflow-template/compare/v1.3.0...v1.4.0) (2026-04-14)
+
+
+### Features
+
+* add WorkflowPromotionSnapshot interface and update WorkflowParams to include promotion and selectedTerm ([01c3803](https://github.com/carteracredit/workflow-template/commit/01c38037b38b1d527f155667c9b0a2f60e6dc62d))
+
 # [1.4.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.3.0...v1.4.0-rc.1) (2026-04-14)
 
 
