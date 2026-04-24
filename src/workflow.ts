@@ -45,6 +45,52 @@ interface WorkflowEnv {
 			caseId: string,
 			data: Record<string, unknown>,
 		) => Promise<void>;
+		createSignatureRequest: (input: {
+			caseId: string;
+			templateId: string;
+			flow: "embedded" | "email_only" | "email_and_sms";
+			signers: Array<{
+				role?: string;
+				name?: string;
+				email?: string;
+				phone?: string;
+			}>;
+			customFields?: Array<{ name: string; value: string }>;
+			subject?: string;
+			message?: string;
+			workflowInstanceId?: string;
+			workflowNodeId?: string;
+		}) => Promise<{
+			signatureRequestId: string;
+			status: string;
+			flow: string;
+		}>;
+		getSignatureRequestStatus: (input: {
+			signatureRequestId: string;
+		}) => Promise<{
+			id: string;
+			caseId: string;
+			signatureRequestId: string;
+			templateId: string;
+			flow: string;
+			status: string;
+			signers: Array<{
+				role: string;
+				name: string;
+				email: string;
+				signatureId?: string;
+				status: string;
+				signedAt?: string | null;
+			}>;
+			customFields: unknown[];
+			lastEventType: string | null;
+			lastEventAt: string | null;
+			signedPdfDocumentId: string | null;
+			workflowInstanceId: string | null;
+			workflowNodeId: string | null;
+			createdAt: string;
+			updatedAt: string;
+		} | null>;
 	};
 }
 
