@@ -47,19 +47,31 @@ interface WorkflowEnv {
 		) => Promise<void>;
 		createSignatureRequest: (input: {
 			caseId: string;
-			templateId: string;
-			flow: "embedded" | "email_only" | "email_and_sms";
-			signers: Array<{
-				role?: string;
-				name?: string;
-				email?: string;
-				phone?: string;
-			}>;
-			customFields?: Array<{ name: string; value: string }>;
-			subject?: string;
-			message?: string;
 			workflowInstanceId?: string;
 			workflowNodeId?: string;
+			nodeConfig: {
+				templateId: string;
+				flow: "embedded" | "email_only" | "email_and_sms";
+				title?: string;
+				subject?: string;
+				message?: string;
+				testMode?: boolean;
+				smsAuthentication?: boolean;
+				ccEmailAddresses?: string[];
+				signers: Array<{
+					role: string;
+					source: "case_role" | "variable";
+					caseRole?: "client" | "seller" | "credit_agent" | "org_manager";
+					email?: string;
+					name?: string;
+					smsPhoneNumber?: string;
+				}>;
+				customFields: Array<{
+					apiId: string;
+					name: string;
+					value: string;
+				}>;
+			};
 		}) => Promise<{
 			signatureRequestId: string;
 			status: string;
