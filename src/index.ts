@@ -33,26 +33,35 @@ function extractBearer(request: Request): string | null {
 
 async function verifyJwt(request: Request, env: Env): Promise<Response | null> {
 	const token = extractBearer(request);
-	if (!token) return Response.json({ error: "Unauthorized" }, { status: 401 });
-
-	// Service-to-service bypass: a shared secret stored as an env var avoids
-	// the need for a signed JWT on internal machine-to-machine calls (e.g.
-	// cases-svc firing the signature_signed event after a Dropbox webhook).
-	const serviceSecret = (env as { WORKFLOW_SERVICE_SECRET?: string })
-		.WORKFLOW_SERVICE_SECRET;
-	if (serviceSecret && token === serviceSecret) return null;
+	if (!token) {
+		console.warn(
+			"[workflow-worker:auth] 401 — no Bearer token in Authorization header",
+		);
+		return Response.json({ error: "Unauthorized" }, { status: 401 });
+	}
 
 	const authService = (env as { AUTH_SERVICE?: AuthSvcRpc }).AUTH_SERVICE;
-	if (!authService)
+	if (!authService) {
+		console.error(
+			"[workflow-worker:auth] 401 — AUTH_SERVICE binding is not configured",
+		);
 		return Response.json({ error: "Unauthorized" }, { status: 401 });
+	}
 	try {
 		const jwks = await getJWKS(authService);
 		const jwksInstance = jose.createLocalJWKSet(jwks);
 		const { payload } = await jose.jwtVerify(token, jwksInstance);
-		if (!payload.sub)
+		if (!payload.sub) {
+			console.warn(
+				"[workflow-worker:auth] 401 — token verified but payload.sub is missing",
+			);
 			return Response.json({ error: "Unauthorized" }, { status: 401 });
+		}
 		return null;
-	} catch {
+	} catch (err) {
+		console.warn(
+			`[workflow-worker:auth] 401 — JWT verification failed: ${err instanceof Error ? err.message : String(err)}`,
+		);
 		return Response.json({ error: "Unauthorized" }, { status: 401 });
 	}
 }
