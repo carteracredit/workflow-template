@@ -1,3 +1,10 @@
+# [1.7.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.6.0...v1.7.0-rc.1) (2026-05-18)
+
+
+### Features
+
+* add proxy service integration and enhance request handling ([a6335ef](https://github.com/carteracredit/workflow-template/commit/a6335ef73c6233f1a03914584bafdc56b36b9e5e))
+
 # [1.6.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.6.0-rc.1...v1.6.0-rc.2) (2026-05-18)
 
 
