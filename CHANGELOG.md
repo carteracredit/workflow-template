@@ -5,6 +5,7 @@
 
 * add proxy service integration and enhance request handling ([a6335ef](https://github.com/carteracredit/workflow-template/commit/a6335ef73c6233f1a03914584bafdc56b36b9e5e))
 
+
 # [1.6.0](https://github.com/carteracredit/workflow-template/compare/v1.5.0...v1.6.0) (2026-04-28)
 
 
