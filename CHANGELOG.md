@@ -5,6 +5,13 @@
 
 * add proxy service integration and enhance request handling ([a6335ef](https://github.com/carteracredit/workflow-template/commit/a6335ef73c6233f1a03914584bafdc56b36b9e5e))
 
+# [1.6.0](https://github.com/carteracredit/workflow-template/compare/v1.5.0...v1.6.0) (2026-04-28)
+
+
+### Features
+
+* enhance JWT verification process in verifyJwt function ([ae81535](https://github.com/carteracredit/workflow-template/commit/ae81535bfcc9a466f1d2204b0ad77d03cb6d62b0))
+
 # [1.6.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.5.0...v1.6.0-rc.1) (2026-04-28)
 
 
