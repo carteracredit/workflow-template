@@ -27,6 +27,11 @@
 			"service": "cases-svc",
 			"entrypoint": "CasesSvcEntrypoint",
 		},
+		{
+			"binding": "PROXY_SVC",
+			"service": "proxy-svc",
+			"entrypoint": "ProxySvcEntrypoint",
+		},
 	],
 	"vars": {
 		"ENVIRONMENT": "development",
@@ -70,6 +75,11 @@
 					"binding": "CASES_SVC",
 					"service": "cases-svc-prod",
 					"entrypoint": "CasesSvcEntrypoint",
+				},
+				{
+					"binding": "PROXY_SVC",
+					"service": "proxy-svc-prod",
+					"entrypoint": "ProxySvcEntrypoint",
 				},
 			],
 			"vars": {

@@ -34,6 +34,30 @@ interface WorkflowEnv {
 		}) => Promise<{ ok: boolean }>;
 	};
 	WORKFLOW_ID: string;
+	PROXY_SVC: {
+		nlsCreateLoan: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ success: boolean; raw?: unknown }>;
+		nlsCancelLoan: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ success: boolean; raw?: unknown }>;
+		nlsGetAmortization: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{
+			LoanAmount: number;
+			CashFlow: string;
+			totalOfPayments: number;
+			regularPaymentAmount: number;
+			firstPaymentApr: string;
+			lastPaymentAmount: number;
+			lastPaymentDate: string | null;
+			OriginationDate: string;
+			apr: number | null;
+		}>;
+	};
 	CASES_SVC: {
 		getCaseRoleContacts: (input: { caseId: string }) => Promise<{
 			roleContacts: Record<
