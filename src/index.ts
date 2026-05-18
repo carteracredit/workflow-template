@@ -81,7 +81,10 @@ export default {
 			const body = await request
 				.json<Record<string, unknown>>()
 				.catch(() => ({}));
-			const instance = await env.WORKFLOW.create({ params: body });
+			const jwt = extractBearer(request);
+			const instance = await env.WORKFLOW.create({
+				params: { ...body, _jwt: jwt ?? "" },
+			});
 			return Response.json({ instanceId: instance.id }, { status: 201 });
 		}
 
