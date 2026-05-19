@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/carteracredit/workflow-template/compare/v1.7.0...v1.8.0) (2026-05-19)
+
+
+### Features
+
+* add runPrequalificationForWorkflow method to WorkflowEnv interface ([e732920](https://github.com/carteracredit/workflow-template/commit/e7329205575f3d6a06d0e5bc6ffea8a0dc8b9923))
+
 # [1.8.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.7.0...v1.8.0-rc.1) (2026-05-19)
 
 
