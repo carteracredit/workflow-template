@@ -127,6 +127,42 @@ interface WorkflowEnv {
 			createdAt: string;
 			updatedAt: string;
 		} | null>;
+		runPrequalificationForWorkflow: (input: {
+			userJwt: string;
+			mode: "case_attached" | "lead";
+			userId?: string;
+			identity?: {
+				firstName: string;
+				middleName?: string;
+				lastName: string;
+				email: string;
+				birthDate?: string;
+				phoneNumber?: string;
+				taxIdType?: "SSN" | "ITIN" | null;
+				taxIdNumber?: string;
+				addressStreetNumber: string;
+				addressStreetName: string;
+				addressApt?: string;
+				addressCity: string;
+				addressState: string;
+				addressZipCode: string;
+			};
+			caseId?: string;
+			orgId?: string;
+			pullType?: "soft" | "hard" | "new";
+		}) => Promise<{
+			runId: string;
+			passes: boolean | null;
+			reason?: string | null;
+			scoreCardV3: number | null;
+			scoreCardV4: number | null;
+			errorCode?: string | null;
+			requestedPullType?: "soft" | "hard" | "new";
+			actualPullType?: "soft" | "hard" | "new";
+			reusedSoftPull?: boolean;
+			mode: "case_attached" | "lead";
+			cifNumber: string | null;
+		}>;
 	};
 }
 
