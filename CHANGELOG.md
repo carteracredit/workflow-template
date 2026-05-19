@@ -5,6 +5,13 @@
 
 * add runPrequalificationForWorkflow method to WorkflowEnv interface ([e732920](https://github.com/carteracredit/workflow-template/commit/e7329205575f3d6a06d0e5bc6ffea8a0dc8b9923))
 
+# [1.7.0](https://github.com/carteracredit/workflow-template/compare/v1.6.0...v1.7.0) (2026-05-18)
+
+
+### Features
+
+* add proxy service integration and enhance request handling ([a6335ef](https://github.com/carteracredit/workflow-template/commit/a6335ef73c6233f1a03914584bafdc56b36b9e5e))
+
 # [1.7.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.6.0...v1.7.0-rc.1) (2026-05-18)
 
 
