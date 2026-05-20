@@ -1,3 +1,10 @@
+# [1.8.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.8.0-rc.1...v1.8.0-rc.2) (2026-05-20)
+
+
+### Features
+
+* extend WorkflowEnv interface with additional properties ([e66bbe4](https://github.com/carteracredit/workflow-template/commit/e66bbe409d544947e29ffa351115d9b9942c4d1e))
+
 # [1.8.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.7.0...v1.8.0-rc.1) (2026-05-19)
 
 
