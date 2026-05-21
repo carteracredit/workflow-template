@@ -165,7 +165,19 @@ interface WorkflowEnv {
 			preApprovalResult?: number | null;
 			preApprovalDate?: string | null;
 			passesValidation?: number | null;
-			bureau?: Record<string, unknown> | null;
+			bureau?: {
+				fico: number | null;
+				scoreFactor1: string | null;
+				scoreFactor2: string | null;
+				scoreFactor3: string | null;
+				scoreFactor4: string | null;
+				bankruptcyColor: string | null;
+				mortgageColor: string | null;
+				adjudication: string | null;
+				defaults: number | null;
+				hasMortgage: boolean | null;
+				hasBankruptcy: boolean | null;
+			} | null;
 		}>;
 		findPrequalificationMatches: (
 			matchData: Record<string, string | undefined>,

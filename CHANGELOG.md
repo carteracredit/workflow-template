@@ -1,3 +1,52 @@
+# [1.9.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.9.0-rc.1...v1.9.0-rc.2) (2026-05-20)
+
+
+### Bug Fixes
+
+* add missing newline at end of package.json ([5785b0c](https://github.com/carteracredit/workflow-template/commit/5785b0c4699d6a75ec058f59f09f1ba8b1edd174))
+
+# [1.9.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.8.0...v1.9.0-rc.1) (2026-05-20)
+
+
+### Features
+
+* extend WorkflowEnv interface with additional properties ([e66bbe4](https://github.com/carteracredit/workflow-template/commit/e66bbe409d544947e29ffa351115d9b9942c4d1e))
+
+# [1.8.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.8.0-rc.1...v1.8.0-rc.2) (2026-05-20)
+
+
+### Features
+
+* extend WorkflowEnv interface with additional properties ([e66bbe4](https://github.com/carteracredit/workflow-template/commit/e66bbe409d544947e29ffa351115d9b9942c4d1e))
+
+# [1.8.0](https://github.com/carteracredit/workflow-template/compare/v1.7.0...v1.8.0) (2026-05-19)
+
+
+### Features
+
+* add runPrequalificationForWorkflow method to WorkflowEnv interface ([e732920](https://github.com/carteracredit/workflow-template/commit/e7329205575f3d6a06d0e5bc6ffea8a0dc8b9923))
+
+# [1.8.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.7.0...v1.8.0-rc.1) (2026-05-19)
+
+
+### Features
+
+* add runPrequalificationForWorkflow method to WorkflowEnv interface ([e732920](https://github.com/carteracredit/workflow-template/commit/e7329205575f3d6a06d0e5bc6ffea8a0dc8b9923))
+
+# [1.7.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.7.0-rc.1...v1.7.0-rc.2) (2026-05-19)
+
+
+### Features
+
+* add runPrequalificationForWorkflow method to WorkflowEnv interface ([e732920](https://github.com/carteracredit/workflow-template/commit/e7329205575f3d6a06d0e5bc6ffea8a0dc8b9923))
+
+# [1.7.0](https://github.com/carteracredit/workflow-template/compare/v1.6.0...v1.7.0) (2026-05-18)
+
+
+### Features
+
+* add proxy service integration and enhance request handling ([a6335ef](https://github.com/carteracredit/workflow-template/commit/a6335ef73c6233f1a03914584bafdc56b36b9e5e))
+
 # [1.7.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.6.0...v1.7.0-rc.1) (2026-05-18)
 
 
