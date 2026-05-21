@@ -127,11 +127,11 @@ interface WorkflowEnv {
 			createdAt: string;
 			updatedAt: string;
 		} | null>;
-		runPrequalificationForWorkflow: (input: {
+		runPrequalification: (input: {
 			userJwt: string;
-			mode: "case_attached" | "lead";
+			actorType: "applicant" | "coapplicant";
 			userId?: string;
-			identity?: {
+			data?: {
 				firstName: string;
 				middleName?: string;
 				lastName: string;
@@ -146,7 +146,7 @@ interface WorkflowEnv {
 				addressCity: string;
 				addressState: string;
 				addressZipCode: string;
-			};
+			} | null;
 			caseId?: string;
 			orgId?: string;
 			pullType?: "soft" | "hard" | "new";
@@ -160,7 +160,7 @@ interface WorkflowEnv {
 			requestedPullType?: "soft" | "hard" | "new";
 			actualPullType?: "soft" | "hard" | "new";
 			reusedSoftPull?: boolean;
-			mode: "case_attached" | "lead";
+			actorType: "applicant" | "coapplicant";
 			cifNumber: string | null;
 			preApprovalResult?: number | null;
 			preApprovalDate?: string | null;
@@ -178,6 +178,11 @@ interface WorkflowEnv {
 				hasMortgage: boolean | null;
 				hasBankruptcy: boolean | null;
 			} | null;
+		}>;
+		findPrequalificationMatches: (
+			matchData: Record<string, string | undefined>,
+		) => Promise<{
+			matches: Array<Record<string, unknown>>;
 		}>;
 	};
 }
