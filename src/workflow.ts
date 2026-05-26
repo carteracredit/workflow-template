@@ -57,6 +57,105 @@ interface WorkflowEnv {
 			OriginationDate: string;
 			apr: number | null;
 		}>;
+		// Oleada 1 — Loan Reads
+		nlsGetLoan: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		nlsGetLoanDetail1: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		nlsGetPaymentInfo: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		nlsGetCollectionFields: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[] }>;
+		nlsGetStatuses: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[] }>;
+		nlsGetPaymentHistory: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[] }>;
+		nlsGetPaymentsDue: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[] }>;
+		nlsGetPayoffAmounts: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[] }>;
+		nlsGetPayoffDetails: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		// Oleada 2 — Loan Writes
+		nlsSubmitPayment: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		nlsAddCollectionComment: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		nlsUpdateCollectionComment: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		nlsCancelPromiseToPay: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ success: boolean }>;
+		nlsAddCreditCard: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		nlsForgetCreditCard: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ success: boolean }>;
+		nlsGetWebPayUrl: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ url: string | null }>;
+		nlsGetAddPaymentMethodUrl: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ url: string | null }>;
+		nlsGetConvenienceFee: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		// Oleada 3 — Contacts & Utils
+		nlsGetContact: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		nlsSearchContacts: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[]; total: number }>;
+		nlsSearchLoans: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[]; total: number }>;
+		nlsParseName: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		nlsParseAddress: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<Record<string, unknown> | null>;
+		nlsCalculateAmortizedPayment: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ paymentAmount: number | null }>;
 	};
 	CASES_SVC: {
 		getCaseRoleContacts: (input: { caseId: string }) => Promise<{
@@ -127,11 +226,11 @@ interface WorkflowEnv {
 			createdAt: string;
 			updatedAt: string;
 		} | null>;
-		runPrequalificationForWorkflow: (input: {
+		runPrequalification: (input: {
 			userJwt: string;
-			mode: "case_attached" | "lead";
+			actorType: "applicant" | "coapplicant";
 			userId?: string;
-			identity?: {
+			data?: {
 				firstName: string;
 				middleName?: string;
 				lastName: string;
@@ -146,7 +245,7 @@ interface WorkflowEnv {
 				addressCity: string;
 				addressState: string;
 				addressZipCode: string;
-			};
+			} | null;
 			caseId?: string;
 			orgId?: string;
 			pullType?: "soft" | "hard" | "new";
@@ -160,7 +259,7 @@ interface WorkflowEnv {
 			requestedPullType?: "soft" | "hard" | "new";
 			actualPullType?: "soft" | "hard" | "new";
 			reusedSoftPull?: boolean;
-			mode: "case_attached" | "lead";
+			actorType: "applicant" | "coapplicant";
 			cifNumber: string | null;
 			preApprovalResult?: number | null;
 			preApprovalDate?: string | null;
@@ -178,6 +277,11 @@ interface WorkflowEnv {
 				hasMortgage: boolean | null;
 				hasBankruptcy: boolean | null;
 			} | null;
+		}>;
+		findPrequalificationMatches: (
+			matchData: Record<string, string | undefined>,
+		) => Promise<{
+			matches: Array<Record<string, unknown>>;
 		}>;
 	};
 }

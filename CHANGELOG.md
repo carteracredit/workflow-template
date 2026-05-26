@@ -1,3 +1,17 @@
+# [1.10.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.9.0...v1.10.0-rc.1) (2026-05-26)
+
+
+### Features
+
+* expand WorkflowEnv interface with new loan and payment methods ([582fdf3](https://github.com/carteracredit/workflow-template/commit/582fdf3fcf96863342f30004895eff423c6c96cf))
+
+# [1.9.0-rc.3](https://github.com/carteracredit/workflow-template/compare/v1.9.0-rc.2...v1.9.0-rc.3) (2026-05-26)
+
+
+### Features
+
+* expand WorkflowEnv interface with new loan and payment methods ([582fdf3](https://github.com/carteracredit/workflow-template/commit/582fdf3fcf96863342f30004895eff423c6c96cf))
+
 # [1.9.0](https://github.com/carteracredit/workflow-template/compare/v1.8.0...v1.9.0) (2026-05-20)
 
 
