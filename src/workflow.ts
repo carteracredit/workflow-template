@@ -57,7 +57,7 @@ interface WorkflowEnv {
 			OriginationDate: string;
 			apr: number | null;
 		}>;
-		// Oleada 1 — Loan Reads
+		// Loan Reads
 		nlsGetLoan: (input: {
 			bearerToken: string;
 			body: Record<string, unknown>;
@@ -94,11 +94,7 @@ interface WorkflowEnv {
 			bearerToken: string;
 			body: Record<string, unknown>;
 		}) => Promise<Record<string, unknown> | null>;
-		// Oleada 2 — Loan Writes
-		nlsSubmitPayment: (input: {
-			bearerToken: string;
-			body: Record<string, unknown>;
-		}) => Promise<Record<string, unknown> | null>;
+		// Collection Comments
 		nlsAddCollectionComment: (input: {
 			bearerToken: string;
 			body: Record<string, unknown>;
@@ -107,31 +103,7 @@ interface WorkflowEnv {
 			bearerToken: string;
 			body: Record<string, unknown>;
 		}) => Promise<Record<string, unknown> | null>;
-		nlsCancelPromiseToPay: (input: {
-			bearerToken: string;
-			body: Record<string, unknown>;
-		}) => Promise<{ success: boolean }>;
-		nlsAddCreditCard: (input: {
-			bearerToken: string;
-			body: Record<string, unknown>;
-		}) => Promise<Record<string, unknown> | null>;
-		nlsForgetCreditCard: (input: {
-			bearerToken: string;
-			body: Record<string, unknown>;
-		}) => Promise<{ success: boolean }>;
-		nlsGetWebPayUrl: (input: {
-			bearerToken: string;
-			body: Record<string, unknown>;
-		}) => Promise<{ url: string | null }>;
-		nlsGetAddPaymentMethodUrl: (input: {
-			bearerToken: string;
-			body: Record<string, unknown>;
-		}) => Promise<{ url: string | null }>;
-		nlsGetConvenienceFee: (input: {
-			bearerToken: string;
-			body: Record<string, unknown>;
-		}) => Promise<Record<string, unknown> | null>;
-		// Oleada 3 — Contacts & Utils
+		// Contacts & Search
 		nlsGetContact: (input: {
 			bearerToken: string;
 			body: Record<string, unknown>;
@@ -144,18 +116,40 @@ interface WorkflowEnv {
 			bearerToken: string;
 			body: Record<string, unknown>;
 		}) => Promise<{ items: Record<string, unknown>[]; total: number }>;
-		nlsParseName: (input: {
-			bearerToken: string;
-			body: Record<string, unknown>;
-		}) => Promise<Record<string, unknown> | null>;
-		nlsParseAddress: (input: {
-			bearerToken: string;
-			body: Record<string, unknown>;
-		}) => Promise<Record<string, unknown> | null>;
+		// Calculations
 		nlsCalculateAmortizedPayment: (input: {
 			bearerToken: string;
 			body: Record<string, unknown>;
 		}) => Promise<{ paymentAmount: number | null }>;
+		// Nuevas funciones
+		nlsGetContactLoans: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[]; total: number }>;
+		nlsGetContactPortfolio: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[]; total: number }>;
+		nlsGetContactEmployments: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[]; total: number }>;
+		nlsGetLoanTransactions: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[]; total: number }>;
+		nlsGetAmortizationSchedule: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[]; total: number }>;
+		nlsAdvancePeriod: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ date: string | null }>;
+		nlsGetLoanStatusCodes: (input: {
+			bearerToken: string;
+			body: Record<string, unknown>;
+		}) => Promise<{ items: Record<string, unknown>[]; total: number }>;
 	};
 	CASES_SVC: {
 		getCaseRoleContacts: (input: { caseId: string }) => Promise<{
