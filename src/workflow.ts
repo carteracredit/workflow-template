@@ -298,6 +298,7 @@ interface WorkflowEnv {
 				templateName: string;
 				subject?: string;
 				mergeVars?: Record<string, string>;
+				urlVarName?: string;
 			};
 			smsBody?: string;
 		}) => Promise<{
