@@ -1,3 +1,10 @@
+# [1.11.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.10.0...v1.11.0-rc.1) (2026-06-02)
+
+
+### Features
+
+* add dispatchExternalLink method to WorkflowEnv interface ([8fc0574](https://github.com/carteracredit/workflow-template/commit/8fc05743e94e6f5a9dbb0611af311ed884eef0fd))
+
 # [1.10.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.10.0-rc.1...v1.10.0-rc.2) (2026-06-02)
 
 
