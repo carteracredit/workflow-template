@@ -1,3 +1,17 @@
+# [1.12.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.11.0...v1.12.0-rc.1) (2026-06-02)
+
+
+### Features
+
+* add urlVarName property to WorkflowEnv interface ([c4be0e6](https://github.com/carteracredit/workflow-template/commit/c4be0e622d0aaa5254cf58cd571edceec8be9fe1))
+
+# [1.11.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.11.0-rc.1...v1.11.0-rc.2) (2026-06-02)
+
+
+### Features
+
+* add urlVarName property to WorkflowEnv interface ([c4be0e6](https://github.com/carteracredit/workflow-template/commit/c4be0e622d0aaa5254cf58cd571edceec8be9fe1))
+
 # [1.11.0](https://github.com/carteracredit/workflow-template/compare/v1.10.0...v1.11.0) (2026-06-02)
 
 
