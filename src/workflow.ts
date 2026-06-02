@@ -277,6 +277,34 @@ interface WorkflowEnv {
 		) => Promise<{
 			matches: Array<Record<string, unknown>>;
 		}>;
+		dispatchExternalLink: (input: {
+			caseId: string;
+			instanceId: string;
+			nodeId: string;
+			stepName: string;
+			mode: "form" | "challenge";
+			eventType: string;
+			recipient: { email?: string; phone?: string; name?: string };
+			channels: ("email" | "sms")[];
+			ttlSeconds: number;
+			formId?: string;
+			formVersion?: number;
+			challengeConfig?: {
+				challengeType: string;
+				labels?: Record<string, string>;
+				timeout?: Record<string, unknown>;
+			};
+			emailConfig?: {
+				templateName: string;
+				subject?: string;
+				mergeVars?: Record<string, string>;
+			};
+			smsBody?: string;
+		}) => Promise<{
+			jti: string;
+			expiresAt: string;
+			sentChannels: string[];
+		}>;
 	};
 }
 
