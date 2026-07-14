@@ -194,6 +194,11 @@ interface WorkflowEnv {
 			status: string;
 			flow: string;
 		}>;
+		generatePdfDocument: (input: {
+			caseId: string;
+			pdfTemplateId: string;
+			fieldValues: Record<string, string>;
+		}) => Promise<{ documentId: string; fileName: string }>;
 		getSignatureRequestStatus: (input: {
 			signatureRequestId: string;
 		}) => Promise<{
