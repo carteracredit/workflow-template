@@ -1,3 +1,12 @@
+# [1.13.0](https://github.com/carteracredit/workflow-template/compare/v1.12.0...v1.13.0) (2026-07-15)
+
+
+### Features
+
+* add generatePdfDocument method to WorkflowEnv interface ([dba249f](https://github.com/carteracredit/workflow-template/commit/dba249fed1c3a49ebf72da66c46c3d0bd7d0c9ac))
+* add optional pdfTemplateVersionId to generatePdfDocument method ([0934d38](https://github.com/carteracredit/workflow-template/commit/0934d38394bff0f05b1ecbca8d18c0004ccac595))
+* enhance WorkflowInstance with restart options ([10e9cdd](https://github.com/carteracredit/workflow-template/commit/10e9cdd20acb40f50b14dd006606f5c9cceef03f))
+
 # [1.13.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.12.0...v1.13.0-rc.1) (2026-07-15)
 
 
