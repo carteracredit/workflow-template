@@ -13,6 +13,13 @@
 * add generatePdfDocument method to WorkflowEnv interface ([dba249f](https://github.com/carteracredit/workflow-template/commit/dba249fed1c3a49ebf72da66c46c3d0bd7d0c9ac))
 * add optional pdfTemplateVersionId to generatePdfDocument method ([0934d38](https://github.com/carteracredit/workflow-template/commit/0934d38394bff0f05b1ecbca8d18c0004ccac595))
 
+# [1.12.0](https://github.com/carteracredit/workflow-template/compare/v1.11.0...v1.12.0) (2026-06-02)
+
+
+### Features
+
+* add urlVarName property to WorkflowEnv interface ([c4be0e6](https://github.com/carteracredit/workflow-template/commit/c4be0e622d0aaa5254cf58cd571edceec8be9fe1))
+
 # [1.12.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.11.0...v1.12.0-rc.1) (2026-06-02)
 
 
