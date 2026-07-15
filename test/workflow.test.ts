@@ -1,5 +1,6 @@
 import { SELF } from "cloudflare:test";
 import { describe, expect, it } from "vitest";
+import { parseRestartOptions } from "../src/index";
 import { MyWorkflow } from "../src/workflow";
 
 /**
@@ -36,5 +37,54 @@ describe("Workflow Worker - HTTP routing", () => {
 		const body = await response.json<{ error: string }>();
 		expect(typeof body.error).toBe("string");
 		expect(body.error.length).toBeGreaterThan(0);
+	});
+});
+
+describe("parseRestartOptions", () => {
+	it("returns undefined when the body is empty (restart from the beginning)", async () => {
+		const request = new Request("http://local.test/x/restart", {
+			method: "POST",
+		});
+		await expect(parseRestartOptions(request)).resolves.toBeUndefined();
+	});
+
+	it("returns undefined when the body has no from.name", async () => {
+		const request = new Request("http://local.test/x/restart", {
+			method: "POST",
+			body: JSON.stringify({}),
+			headers: { "Content-Type": "application/json" },
+		});
+		await expect(parseRestartOptions(request)).resolves.toBeUndefined();
+	});
+
+	it("returns undefined when the body is not valid JSON", async () => {
+		const request = new Request("http://local.test/x/restart", {
+			method: "POST",
+			body: "not-json",
+			headers: { "Content-Type": "application/json" },
+		});
+		await expect(parseRestartOptions(request)).resolves.toBeUndefined();
+	});
+
+	it("returns { from: { name } } when the body has from.name", async () => {
+		const request = new Request("http://local.test/x/restart", {
+			method: "POST",
+			body: JSON.stringify({ from: { name: "test-de-checkpoint" } }),
+			headers: { "Content-Type": "application/json" },
+		});
+		await expect(parseRestartOptions(request)).resolves.toEqual({
+			from: { name: "test-de-checkpoint" },
+		});
+	});
+
+	it("coerces a non-string from.name to a string", async () => {
+		const request = new Request("http://local.test/x/restart", {
+			method: "POST",
+			body: JSON.stringify({ from: { name: 42 } }),
+			headers: { "Content-Type": "application/json" },
+		});
+		await expect(parseRestartOptions(request)).resolves.toEqual({
+			from: { name: "42" },
+		});
 	});
 });

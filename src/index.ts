@@ -8,6 +8,39 @@ interface AuthSvcRpc {
 	fetch(request: Request): Promise<Response>;
 }
 
+/**
+ * `WorkflowInstance.restart()` accepts an optional `{ from: { name } }` argument in
+ * the Cloudflare Workflows API (added to workerd 2026-05-07), but the
+ * `restart(): Promise<void>` signature generated from this project's pinned
+ * wrangler/workerd types predates that addition. The deployed edge runtime already
+ * honors the option; only the local type declaration is stale, so we widen it here
+ * instead of bumping wrangler (which would require Node.js 22, breaking this
+ * template's Node 20 CI/deploy pipeline).
+ */
+interface RestartableWorkflowInstance {
+	restart(options?: { from?: { name: string } }): Promise<void>;
+}
+
+/**
+ * Parses the optional `{ from: { name } }` body of a `POST /:instanceId/restart`
+ * request into the options accepted by `WorkflowInstance.restart()`. Returns
+ * `undefined` when the body is missing/invalid or has no `from.name`, which
+ * restarts the instance from the beginning (the pre-existing behavior).
+ */
+export async function parseRestartOptions(
+	request: Request,
+): Promise<{ from: { name: string } } | undefined> {
+	const rawBody = await request
+		.json<{ from?: { name?: string } }>()
+		.catch(() => ({}));
+	const from =
+		rawBody && typeof rawBody === "object" && "from" in rawBody
+			? (rawBody as { from?: { name?: string } }).from
+			: undefined;
+	const fromName = from?.name ? String(from.name) : undefined;
+	return fromName ? { from: { name: fromName } } : undefined;
+}
+
 const JWKS_CACHE_TTL_MS = 3600 * 1000;
 let cachedJWKS: jose.JSONWebKeySet | null = null;
 let cachedJWKSExpiry = 0;
@@ -142,9 +175,13 @@ export default {
 					case "terminate":
 						await instance.terminate();
 						return Response.json({ ok: true });
-					case "restart":
-						await instance.restart();
+					case "restart": {
+						const restartOptions = await parseRestartOptions(request);
+						await (instance as unknown as RestartableWorkflowInstance).restart(
+							restartOptions,
+						);
 						return Response.json({ ok: true });
+					}
 					default:
 						return Response.json(
 							{ error: `Unknown action: ${action}` },
