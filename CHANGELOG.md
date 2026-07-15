@@ -1,3 +1,10 @@
+# [1.12.0-rc.3](https://github.com/carteracredit/workflow-template/compare/v1.12.0-rc.2...v1.12.0-rc.3) (2026-07-15)
+
+
+### Features
+
+* enhance WorkflowInstance with restart options ([10e9cdd](https://github.com/carteracredit/workflow-template/commit/10e9cdd20acb40f50b14dd006606f5c9cceef03f))
+
 # [1.12.0-rc.2](https://github.com/carteracredit/workflow-template/compare/v1.12.0-rc.1...v1.12.0-rc.2) (2026-07-14)
 
 
