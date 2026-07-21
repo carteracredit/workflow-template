@@ -87,4 +87,41 @@ describe("parseRestartOptions", () => {
 			from: { name: "42" },
 		});
 	});
+
+	it("passes through from.type when it is a valid step type", async () => {
+		const request = new Request("http://local.test/x/restart", {
+			method: "POST",
+			body: JSON.stringify({
+				from: { name: "reto-de-identidad", type: "waitForEvent" },
+			}),
+			headers: { "Content-Type": "application/json" },
+		});
+		await expect(parseRestartOptions(request)).resolves.toEqual({
+			from: { name: "reto-de-identidad", type: "waitForEvent" },
+		});
+	});
+
+	it("passes through from.count alongside from.name", async () => {
+		const request = new Request("http://local.test/x/restart", {
+			method: "POST",
+			body: JSON.stringify({ from: { name: "process", count: 3 } }),
+			headers: { "Content-Type": "application/json" },
+		});
+		await expect(parseRestartOptions(request)).resolves.toEqual({
+			from: { name: "process", count: 3 },
+		});
+	});
+
+	it("drops an invalid from.type instead of defaulting it to 'do'", async () => {
+		const request = new Request("http://local.test/x/restart", {
+			method: "POST",
+			body: JSON.stringify({
+				from: { name: "reto-de-identidad", type: "not-a-real-type" },
+			}),
+			headers: { "Content-Type": "application/json" },
+		});
+		await expect(parseRestartOptions(request)).resolves.toEqual({
+			from: { name: "reto-de-identidad" },
+		});
+	});
 });
