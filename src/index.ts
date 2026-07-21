@@ -9,36 +9,79 @@ interface AuthSvcRpc {
 }
 
 /**
- * `WorkflowInstance.restart()` accepts an optional `{ from: { name } }` argument in
- * the Cloudflare Workflows API (added to workerd 2026-05-07), but the
- * `restart(): Promise<void>` signature generated from this project's pinned
- * wrangler/workerd types predates that addition. The deployed edge runtime already
- * honors the option; only the local type declaration is stale, so we widen it here
+ * `WorkflowInstance.restart()` accepts an optional
+ * `{ from: { name, count?, type? } }` argument in the Cloudflare Workflows
+ * API (added to workerd 2026-05-07), but the `restart(): Promise<void>`
+ * signature generated from this project's pinned wrangler/workerd types
+ * predates that addition. The deployed edge runtime already honors the
+ * option; only the local type declaration is stale, so we widen it here
  * instead of bumping wrangler (which would require Node.js 22, breaking this
  * template's Node 20 CI/deploy pipeline).
  */
 interface RestartableWorkflowInstance {
-	restart(options?: { from?: { name: string } }): Promise<void>;
+	restart(options?: {
+		from?: {
+			name: string;
+			count?: number;
+			type?: "do" | "sleep" | "waitForEvent";
+		};
+	}): Promise<void>;
 }
 
 /**
- * Parses the optional `{ from: { name } }` body of a `POST /:instanceId/restart`
- * request into the options accepted by `WorkflowInstance.restart()`. Returns
- * `undefined` when the body is missing/invalid or has no `from.name`, which
- * restarts the instance from the beginning (the pre-existing behavior).
+ * Parses the optional `{ from: { name, count?, type? } }` body of a
+ * `POST /:instanceId/restart` request into the options accepted by
+ * `WorkflowInstance.restart()`. `type` must be passed through explicitly
+ * even for steps named the same as their `step.do` counterpart — Cloudflare
+ * defaults it to `"do"`, and a `step.waitForEvent` target restarted with the
+ * wrong type is reported as "not found in execution history".
+ *
+ * Returns `undefined` when the body is missing/invalid or has no
+ * `from.name`, which restarts the instance from the beginning (the
+ * pre-existing behavior).
  */
-export async function parseRestartOptions(
-	request: Request,
-): Promise<{ from: { name: string } } | undefined> {
+export async function parseRestartOptions(request: Request): Promise<
+	| {
+			from: {
+				name: string;
+				count?: number;
+				type?: "do" | "sleep" | "waitForEvent";
+			};
+	  }
+	| undefined
+> {
 	const rawBody = await request
-		.json<{ from?: { name?: string } }>()
+		.json<{ from?: { name?: string; count?: number; type?: string } }>()
 		.catch(() => ({}));
 	const from =
 		rawBody && typeof rawBody === "object" && "from" in rawBody
-			? (rawBody as { from?: { name?: string } }).from
+			? (
+					rawBody as {
+						from?: { name?: string; count?: number; type?: string };
+					}
+				).from
 			: undefined;
 	const fromName = from?.name ? String(from.name) : undefined;
-	return fromName ? { from: { name: fromName } } : undefined;
+	if (!fromName) return undefined;
+
+	const count =
+		typeof from?.count === "number" && Number.isFinite(from.count)
+			? from.count
+			: undefined;
+	const type =
+		from?.type === "do" ||
+		from?.type === "sleep" ||
+		from?.type === "waitForEvent"
+			? from.type
+			: undefined;
+
+	return {
+		from: {
+			name: fromName,
+			...(count !== undefined ? { count } : {}),
+			...(type !== undefined ? { type } : {}),
+		},
+	};
 }
 
 const JWKS_CACHE_TTL_MS = 3600 * 1000;
