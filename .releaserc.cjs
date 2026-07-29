@@ -4,10 +4,10 @@
  * - main: stable releases (e.g. 1.0.0, 2.0.0)
  * - dev: prerelease channel "rc" (e.g. 1.0.0-rc.1, 2.0.0-rc.1)
  *
- * On major version bumps (feat!: commits), the prepareCmd updates
- * wrangler.jsonc so the Worker is deployed under a new versioned name
- * (e.g. my-workflow-dev-v2), keeping prior versions running in parallel
- * for in-flight workflow instances.
+ * Worker names and WORKFLOW_VERSION are managed by workflow-svc, which commits
+ * the correct -vN into wrangler.jsonc before CI runs.  The prepareCmd is kept
+ * as a no-op for compatibility with existing repos.  wrangler.jsonc is NOT
+ * listed in the git assets so CI never overwrites what workflow-svc committed.
  */
 module.exports = {
 	branches: [
@@ -46,12 +46,7 @@ module.exports = {
 		[
 			"@semantic-release/git",
 			{
-				assets: [
-					"CHANGELOG.md",
-					"package.json",
-					"pnpm-lock.yaml",
-					"wrangler.jsonc",
-				],
+				assets: ["CHANGELOG.md", "package.json", "pnpm-lock.yaml"],
 				message:
 					"chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
 			},
