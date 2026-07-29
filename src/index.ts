@@ -8,6 +8,28 @@ interface AuthSvcRpc {
 	fetch(request: Request): Promise<Response>;
 }
 
+interface WorkflowSvcRpc {
+	confirmWorkflowDeployment(input: {
+		workflowId: string;
+		majorVersion: number;
+		environment: string;
+		workerName: string;
+	}): Promise<{ ok: boolean; expected?: string; actual?: string }>;
+}
+
+/**
+ * Extracts the worker name (subdomain) from a request URL hostname.
+ *
+ * Given a hostname like `my-workflow-v2.cartera.credit` or
+ * `my-workflow-dev-v1.carteracredit.workers.dev`, returns `my-workflow-v2`
+ * or `my-workflow-dev-v1` respectively — the first label before the first dot.
+ * This matches the `worker_name` field stored in workflow_deployments in D1.
+ */
+export function extractWorkerName(request: Request): string {
+	const hostname = new URL(request.url).hostname;
+	return hostname.split(".")[0] ?? hostname;
+}
+
 /**
  * `WorkflowInstance.restart()` accepts an optional
  * `{ from: { name, count?, type? } }` argument in the Cloudflare Workflows
@@ -149,6 +171,82 @@ export default {
 			.replace(/^\/+|\/+$/g, "")
 			.split("/")
 			.filter(Boolean);
+
+		// POST /deployment-confirm — post-deploy self-report (no JWT, CI-only)
+		if (
+			request.method === "POST" &&
+			pathSegments.length === 1 &&
+			pathSegments[0] === "deployment-confirm"
+		) {
+			const workflowSvc = (env as unknown as { WORKFLOW_SVC?: WorkflowSvcRpc })
+				.WORKFLOW_SVC;
+			if (!workflowSvc) {
+				console.error(
+					"[workflow-worker:confirm] WORKFLOW_SVC binding is not configured",
+				);
+				return Response.json(
+					{ ok: false, error: "WORKFLOW_SVC binding not available" },
+					{ status: 503 },
+				);
+			}
+
+			const workerName = extractWorkerName(request);
+			const workflowId = (env as unknown as { WORKFLOW_ID?: string })
+				.WORKFLOW_ID;
+			if (!workflowId || workflowId === "__WORKFLOW_ID__") {
+				console.error(
+					"[workflow-worker:confirm] WORKFLOW_ID is not configured or is a placeholder",
+				);
+				return Response.json(
+					{ ok: false, error: "WORKFLOW_ID not configured" },
+					{ status: 503 },
+				);
+			}
+
+			const majorVersion = Number(env.WORKFLOW_VERSION);
+			if (!Number.isFinite(majorVersion) || majorVersion < 1) {
+				console.error(
+					`[workflow-worker:confirm] WORKFLOW_VERSION is invalid: ${env.WORKFLOW_VERSION}`,
+				);
+				return Response.json(
+					{ ok: false, error: "WORKFLOW_VERSION not configured" },
+					{ status: 503 },
+				);
+			}
+
+			try {
+				const result = await workflowSvc.confirmWorkflowDeployment({
+					workflowId,
+					majorVersion,
+					environment: env.ENVIRONMENT,
+					workerName,
+				});
+				if (result.ok) {
+					console.log(
+						`[workflow-worker:confirm] Deployment confirmed: ${workerName} (v${majorVersion}, ${env.ENVIRONMENT})`,
+					);
+					return Response.json({ ok: true }, { status: 200 });
+				}
+				console.error(
+					`[workflow-worker:confirm] Confirmation rejected — expected: ${result.expected}, actual: ${result.actual}`,
+				);
+				return Response.json(
+					{
+						ok: false,
+						error: "Worker name mismatch",
+						expected: result.expected,
+						actual: result.actual,
+					},
+					{ status: 409 },
+				);
+			} catch (err) {
+				const msg = err instanceof Error ? err.message : String(err);
+				console.error(
+					`[workflow-worker:confirm] RPC confirmWorkflowDeployment failed: ${msg}`,
+				);
+				return Response.json({ ok: false, error: msg }, { status: 500 });
+			}
+		}
 
 		// POST / — create instance
 		if (request.method === "POST" && pathSegments.length === 0) {

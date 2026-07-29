@@ -1,6 +1,6 @@
 import { SELF } from "cloudflare:test";
 import { describe, expect, it } from "vitest";
-import { parseRestartOptions } from "../src/index";
+import { extractWorkerName, parseRestartOptions } from "../src/index";
 import { MyWorkflow } from "../src/workflow";
 
 /**
@@ -37,6 +37,59 @@ describe("Workflow Worker - HTTP routing", () => {
 		const body = await response.json<{ error: string }>();
 		expect(typeof body.error).toBe("string");
 		expect(body.error.length).toBeGreaterThan(0);
+	});
+});
+
+describe("extractWorkerName", () => {
+	it("extracts subdomain from a production custom domain", () => {
+		const req = new Request(
+			"https://my-workflow-v2.cartera.credit/deployment-confirm",
+			{
+				method: "POST",
+			},
+		);
+		expect(extractWorkerName(req)).toBe("my-workflow-v2");
+	});
+
+	it("extracts subdomain from a workers.dev domain", () => {
+		const req = new Request(
+			"https://my-workflow-dev-v1.carteracredit.workers.dev/deployment-confirm",
+			{ method: "POST" },
+		);
+		expect(extractWorkerName(req)).toBe("my-workflow-dev-v1");
+	});
+
+	it("returns the full hostname when there is no dot", () => {
+		const req = new Request("https://localhost/deployment-confirm", {
+			method: "POST",
+		});
+		expect(extractWorkerName(req)).toBe("localhost");
+	});
+});
+
+describe("POST /deployment-confirm", () => {
+	it("returns 503 when WORKFLOW_SVC binding is absent (test env)", async () => {
+		// In the test environment wrangler.test.jsonc does not bind WORKFLOW_SVC,
+		// so the handler returns 503.
+		const res = await SELF.fetch(
+			"http://my-workflow-dev-v1.local/deployment-confirm",
+			{ method: "POST" },
+		);
+		expect(res.status).toBe(503);
+		const body = await res.json<{ ok: boolean; error: string }>();
+		expect(body.ok).toBe(false);
+		expect(typeof body.error).toBe("string");
+	});
+
+	it("returns 400 for GET /deployment-confirm (wrong method falls through)", async () => {
+		const res = await SELF.fetch(
+			"http://my-workflow-dev-v1.local/deployment-confirm",
+			{ method: "GET" },
+		);
+		// GET on /deployment-confirm is treated as an unknown instance action (400)
+		// because pathSegments[0] = 'deployment-confirm' falls into the instance
+		// handler which requires an instanceId in segment[0] and expects a known action.
+		expect(res.status).toBeGreaterThanOrEqual(400);
 	});
 });
 
