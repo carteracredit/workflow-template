@@ -325,7 +325,6 @@ interface WorkflowPromotionSnapshot {
 	statutoryRate: number;
 	secondaryRate: number;
 	loanTemplateNumber: number;
-	loanPortfolioName: string;
 	template: string;
 }
 
