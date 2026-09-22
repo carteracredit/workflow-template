@@ -5,6 +5,13 @@
 
 * update WorkflowInstance.restart() and parseRestartOptions to support additional parameters ([1630f48](https://github.com/carteracredit/workflow-template/commit/1630f48b165bca80058bac98d4d5d01bed4d753b))
 
+# [1.14.0-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.13.1-rc.1...v1.14.0-rc.1) (2026-09-22)
+
+
+### Features
+
+* add allocateLoanNumber method to WorkflowEnv interface ([1000042](https://github.com/carteracredit/workflow-template/commit/1000042e93e09740b359fb463fe45dd660da3dae))
+
 ## [1.13.1-rc.1](https://github.com/carteracredit/workflow-template/compare/v1.13.0...v1.13.1-rc.1) (2026-07-21)
 
 
