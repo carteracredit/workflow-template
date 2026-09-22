@@ -162,6 +162,12 @@ interface WorkflowEnv {
 			caseId: string,
 			data: Record<string, unknown>,
 		) => Promise<void>;
+		/**
+		 * Allocates (and persists) the `YY-MM-DD-<cifno>-<consecutive>` loan
+		 * number a `createLoan` NLS node should send to proxy-svc. Idempotent
+		 * per case — safe to call again on step retries.
+		 */
+		allocateLoanNumber: (caseId: string) => Promise<string>;
 		createSignatureRequest: (input: {
 			caseId: string;
 			workflowInstanceId?: string;
