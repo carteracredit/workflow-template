@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/carteracredit/workflow-template/compare/v1.13.1...v1.14.0) (2026-09-22)
+
+
+### Features
+
+* add allocateLoanNumber method to WorkflowEnv interface ([1000042](https://github.com/carteracredit/workflow-template/commit/1000042e93e09740b359fb463fe45dd660da3dae))
+
 ## [1.13.1](https://github.com/carteracredit/workflow-template/compare/v1.13.0...v1.13.1) (2026-07-21)
 
 
